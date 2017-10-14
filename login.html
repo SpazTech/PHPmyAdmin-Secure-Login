@@ -1,0 +1,51 @@
+<html>
+	<head lang="en-us">
+		<title>
+			Log in PHPMYADMIN
+		</title>
+		<link rel="shortcut icon" href="login.png" />
+		<style>
+			.login {
+				border:none;
+				box-shadow:3px 3px 8px black;
+				min-height: 400px;
+				height: fit-content;
+				width: 525px;
+			}
+		</style>
+		<script src="../../spazchat/jquery-3.2.1.js"></script>
+		<script>
+			function verify() {
+				var user = document.getElementById("user").value;
+				var pass = document.getElementById("pwd").value;
+				if (user == null || pass == null) {
+					return false;
+				} else {
+					$.ajax ({
+						type: "post",
+						url: "handleAuth.php",
+						data: {"login": "", "user": user, "pass": pass},
+						success: function(data) {
+							window.location = data;
+						}
+					})
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<center><div class="login">
+			<image alt="" src="login.png" height="259" width="412" />
+			 <br/>
+			 	<label for="user">
+			 		Username
+			 	</label><br/>
+			 	<input type="text" id="user" placeholder="username" /><br/><br/>
+			 	<label for="pwd">
+			 		Password
+			 	</label><br/>
+			 	<input type="password" id="pwd" placeholder="password" /><br/><br/>
+			 	<button onclick="verify()">Login to SQL server</button><br/><br/>
+		</div></center><br/><br/><div hidden id="handle"></div>
+	</body>
+</html>
